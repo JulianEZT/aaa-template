@@ -1,5 +1,6 @@
 const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
+const { withAnimations } = require('animated-tailwindcss')
 
 function withOpacityValue(variable) {
   return ({opacityValue}) => {
@@ -10,9 +11,9 @@ function withOpacityValue(variable) {
   };
 }
 
-module.exports = {
+module.exports = withAnimations({
   content: [
-    './src/**/*.{html,ts}'
+    './src/**/*.{html,ts}',
   ],
   important: ':root',
   theme: {
@@ -178,7 +179,7 @@ module.exports = {
       maxWidth: {
         '3xs': '16rem',
         '2xs': '18rem',
-      }
+      }      
     }
   },
   plugins: [
@@ -244,4 +245,4 @@ module.exports = {
   corePlugins: {
     container: false
   }
-};
+});

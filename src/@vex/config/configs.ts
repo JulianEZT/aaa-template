@@ -25,14 +25,14 @@ const defaultConfig: VexConfig = {
   layout: 'horizontal',
   boxed: false,
   sidenav: {
-    title: 'VEX',
+    title: 'AAA',
     imageUrl: 'assets/img/demo/logo.svg',
     showCollapsePin: true,
     user: {
       visible: true
     },
     search: {
-      visible: true
+      visible: false
     },
     state: 'expanded'
   },
@@ -46,7 +46,7 @@ const defaultConfig: VexConfig = {
     position: 'below-toolbar'
   },
   footer: {
-    visible: true,
+    visible: false,
     fixed: true
   }
 };
@@ -74,7 +74,7 @@ export const configs: VexConfig[] = [
         visible: true
       },
       search: {
-        visible: true
+        visible: false
       }
     },
     toolbar: {
