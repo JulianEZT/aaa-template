@@ -2,12 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
     pathMatch: 'full'
+  },{
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent,
+    pathMatch: 'full',
+    children: []
   },{
     path: 'a',
     component: CustomLayoutComponent,

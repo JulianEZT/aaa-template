@@ -11,11 +11,18 @@ import { LoginComponent } from './login/login.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [	AppComponent,
-      LoginComponent
+      LoginComponent,
+      ForgotPasswordComponent
    ],
   imports: [
     BrowserModule,
@@ -26,6 +33,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
 
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatIconModule,
+    
     // Vex
     VexModule,
     CustomLayoutModule
