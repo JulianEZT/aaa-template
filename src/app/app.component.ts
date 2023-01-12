@@ -126,6 +126,44 @@ export class AppComponent {
           {
             type: 'link',
             label: 'Analytics',
+            route: 'a',
+            icon: 'mat:insights',
+            routerLinkActiveOptions: { exact: true }
+          },
+          {
+            type: 'dropdown',
+            label: 'Accionistas - Titulos',
+            icon: 'mat:insights',    
+            children: [
+              {
+                type: 'link',
+                label: 'Administración de títulos',
+                route: 'a',
+                routerLinkActiveOptions: { exact: true }
+              },
+              {
+                type: 'link',
+                label: 'Anulación',
+                route: 'a',
+                routerLinkActiveOptions: { exact: true }
+              },
+              {
+                type: 'link',
+                label: 'Embargos',
+                route: 'a',
+                routerLinkActiveOptions: { exact: true }
+              },
+              {
+                type: 'link',
+                label: 'Traslados',
+                route: 'a',
+                routerLinkActiveOptions: { exact: true }
+              }
+            ]
+          },
+          {
+            type: 'link',
+            label: 'Login',
             route: '/',
             icon: 'mat:insights',
             routerLinkActiveOptions: { exact: true }

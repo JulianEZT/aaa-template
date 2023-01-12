@@ -77,8 +77,8 @@ export class SidenavItemComponent implements OnInit, OnChanges {
 
   onRouteChange() {
     if (this.hasActiveChilds(this.item as NavigationDropdown)) {
-      this.isActive = true;
-      this.isOpen = true;
+      this.isActive = false;
+      this.isOpen = false;
       this.navigationService.triggerOpenChange(this.item as NavigationDropdown);
       this.cd.markForCheck();
     } else {
