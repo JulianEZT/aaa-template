@@ -4,6 +4,7 @@ import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdministracionComponent } from './pages/administracion/administracion.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,12 @@ const routes: Routes = [
   }, {
     path: '',
     component: CustomLayoutComponent,
-    children: [],
+    children: [
+      {
+        path: 'administracion',
+        component: AdministracionComponent
+      }
+    ],
     canActivate: [AuthGuard]
   }
 ];
