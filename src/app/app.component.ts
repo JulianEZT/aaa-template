@@ -138,7 +138,7 @@ export class AppComponent {
               {
                 type: 'link',
                 label: 'Administración de títulos',
-                route: 'administracion',
+                route: 'TitleAdministration',
                 routerLinkActiveOptions: { exact: true }
               },
               {
