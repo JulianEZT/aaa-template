@@ -15,18 +15,20 @@
               <p class="mt-2 text-center text-sm text-gray-600">
                 <a class="text-base mt-2 text-center text-gray-600">ingresa usuario y contraseña</a>
               </p>
+              <mat-error *ngIf="isUser === false">
+                Usuario o contraseña incorrectos
+              </mat-error>
             </div>
-            <form class="mt-8 space-y-6" action="#" method="POST">
-              <input type="hidden" name="remember" value="true">
+            <form class="mt-8 space-y-6" [formGroup]="myForm" (ngSubmit)="submitFormulario()">
               <div class="-space-y-px rounded-md shadow-sm">
                 <div>
                   <mat-form-field appearance="outline" class="mb-4 max-w-sm pr-1 relative block w-full text-lg">
                     <mat-label>Usuario</mat-label>
-                    <input type="text" matInput [formControl]="UserFormControl" [errorStateMatcher]="matcher" required>
-                    <mat-error *ngIf="UserFormControl.hasError('email') && !UserFormControl.hasError('required')">
+                    <input type="text" matInput formControlName="username" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="myForm.hasError('email') && !myForm.hasError('required')">
                       Por favor ingrese un usuario
                     </mat-error>
-                    <mat-error *ngIf="UserFormControl.hasError('required')">
+                    <mat-error *ngIf="myForm.hasError('required')">
                       Usuario es <strong>requerido</strong>
                     </mat-error>
                   </mat-form-field>
@@ -34,17 +36,16 @@
                 <div>
                   <mat-form-field appearance="outline" class="max-w-sm pr-1 relative block w-full text-lg">
                     <mat-label>Contraseña</mat-label>
-                    <input type="text" matInput [formControl]="PasswordFormControl" [errorStateMatcher]="matcher"
-                      required [type]="hide ? 'password' : 'text'">
+                    <input type="text" matInput formControlName="password" [errorStateMatcher]="matcher" required
+                      [type]="hide ? 'password' : 'text'">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                       [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-error
-                      *ngIf="PasswordFormControl.hasError('email') && !PasswordFormControl.hasError('required')">
+                    <mat-error *ngIf="myForm.hasError('email') && !myForm.hasError('required')">
                       Por favor ingrese una Contraseña
                     </mat-error>
-                    <mat-error *ngIf="PasswordFormControl.hasError('required')">
+                    <mat-error *ngIf="myForm.hasError('required')">
                       La contraseña es <strong>requerida</strong>
                     </mat-error>
                   </mat-form-field>
