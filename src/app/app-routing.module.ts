@@ -3,22 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomLayoutComponent } from './custom-layout/custom-layout.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
-    pathMatch: 'full'
-  },{
+  }, {
     path: 'forgotPassword',
     component: ForgotPasswordComponent,
-    pathMatch: 'full',
-    children: []
-  },{
-    path: 'a',
+  }, {
+    path: '',
     component: CustomLayoutComponent,
-    pathMatch: 'full',
-    children: []
+    children: [],
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -29,7 +27,10 @@ const routes: Routes = [
     relativeLinkResolution: 'corrected',
     anchorScrolling: 'enabled'
   })],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    AuthGuard
+  ]
 })
 export class AppRoutingModule {
 }

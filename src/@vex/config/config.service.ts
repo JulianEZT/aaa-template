@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
 })
 export class ConfigService {
 
-  defaultConfig: VexConfigName = VexConfigName.zeus;
+  defaultConfig: VexConfigName = VexConfigName.apollo;
   configs: VexConfig[] = configs;
 
   private _configSubject = new BehaviorSubject(this.configs.find(c => c.id === this.defaultConfig));

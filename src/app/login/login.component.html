@@ -1,6 +1,6 @@
 <body id="tren">
   <div class="container" id="Tren">
-    
+
     <div class="row text-center-test">
 
       <div class="card shadow-2xl max-w-md animate-fadeInDown ">
@@ -8,8 +8,10 @@
         <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div class="w-full max-w-md space-y-8">
             <div>
-              <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-              <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Inicia sesión con tu cuenta</h2>
+              <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                alt="Your Company">
+              <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Inicia sesión con tu cuenta
+              </h2>
               <p class="mt-2 text-center text-sm text-gray-600">
                 <a class="text-base mt-2 text-center text-gray-600">ingresa usuario y contraseña</a>
               </p>
@@ -20,7 +22,7 @@
                 <div>
                   <mat-form-field appearance="outline" class="mb-4 max-w-sm pr-1 relative block w-full text-lg">
                     <mat-label>Usuario</mat-label>
-                    <input type="text" matInput  [formControl]="UserFormControl" [errorStateMatcher]="matcher" required>
+                    <input type="text" matInput [formControl]="UserFormControl" [errorStateMatcher]="matcher" required>
                     <mat-error *ngIf="UserFormControl.hasError('email') && !UserFormControl.hasError('required')">
                       Por favor ingrese un usuario
                     </mat-error>
@@ -32,47 +34,50 @@
                 <div>
                   <mat-form-field appearance="outline" class="max-w-sm pr-1 relative block w-full text-lg">
                     <mat-label>Contraseña</mat-label>
-                    <input type="text" matInput  [formControl]="PasswordFormControl" [errorStateMatcher]="matcher" required [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <input type="text" matInput [formControl]="PasswordFormControl" [errorStateMatcher]="matcher"
+                      required [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-error *ngIf="PasswordFormControl.hasError('email') && !PasswordFormControl.hasError('required')">
+                    <mat-error
+                      *ngIf="PasswordFormControl.hasError('email') && !PasswordFormControl.hasError('required')">
                       Por favor ingrese una Contraseña
                     </mat-error>
                     <mat-error *ngIf="PasswordFormControl.hasError('required')">
                       La contraseña es <strong>requerida</strong>
                     </mat-error>
                   </mat-form-field>
-                </div> 
-              </div>
-        
-              <div class="flex items-center justify-between">
-                      
-                <div class="text-sm">
-                  <a (click)="forgotPassword()" class="cursor font-medium text-cyan-600 hover:text-cyan-500 text-lg">Olvido  su contraseña?</a>
                 </div>
               </div>
-        
+
+              <div class="flex items-center justify-between">
+
+                <div class="text-sm">
+                  <a (click)="forgotPassword()"
+                    class="cursor font-medium text-cyan-600 hover:text-cyan-500 text-lg">Olvido su contraseña?</a>
+                </div>
+              </div>
+
               <div>
-                <button type="submit" class="text-lg group relative flex w-full justify-center rounded-md border border-transparent bg-cyan-500 py-2 px-4 text-sm font-medium text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:ring-offset-2">
+                <button type="submit"
+                  class="text-lg group relative flex w-full justify-center rounded-md border border-transparent bg-cyan-500 py-2 px-4 text-sm font-medium text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:ring-offset-2">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <!-- Heroicon name: mini/lock-closed -->
-                    <svg class="h-5 w-5 text-cyan-200 group-hover:text-cyan-400"  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                    <svg class="h-5 w-5 text-cyan-200 group-hover:text-cyan-400" viewBox="0 0 20 20" fill="currentColor"
+                      aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                        clip-rule="evenodd" />
                     </svg>
                   </span>
-                  Iniciar sesión 
+                  Iniciar sesión
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-
     </div>
-  
-
-
-
-</div>
+  </div>
 </body>

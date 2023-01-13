@@ -17,13 +17,15 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './store/reducers/user.reducer';
 
 @NgModule({
-  declarations: [	AppComponent,
-      LoginComponent,
-      ForgotPasswordComponent
-   ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    ForgotPasswordComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,14 +34,14 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
     MatIconModule,
-    
-    // Vex
+    StoreModule.forRoot({
+      isUser: userReducer
+    }),
     VexModule,
     CustomLayoutModule
   ],
