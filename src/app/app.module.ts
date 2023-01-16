@@ -21,12 +21,15 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user/user.reducer';
 import { EffectsModule } from '@ngrx/effects'
 import { UserEffect } from './store/effects/user/user.effect';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { AnnulmentComponent } from './pages/annulment/annulment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    AnnulmentComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { UserEffect } from './store/effects/user/user.effect';
     MatInputModule,
     MatRippleModule,
     MatIconModule,
+    MatSidenavModule,
     StoreModule.forRoot({
       isUser: userReducer
     }),

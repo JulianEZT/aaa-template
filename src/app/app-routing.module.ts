@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ForgotPasswordComponent } from './pages/forgotPassword/forgotPassword.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TitleAdministrationComponent } from './pages/titleAdministration/titleAdministration.component';
+import { AnnulmentComponent } from './pages/annulment/annulment.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'TitleAdministration',
         component: TitleAdministrationComponent
+      },
+      {
+        path: 'annulment',
+        component: AnnulmentComponent
       }
     ],
     canActivate: [AuthGuard]

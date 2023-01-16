@@ -144,7 +144,7 @@ export class AppComponent {
               {
                 type: 'link',
                 label: 'Anulación',
-                route: 'a',
+                route: 'annulment',
                 routerLinkActiveOptions: { exact: true }
               },
               {
