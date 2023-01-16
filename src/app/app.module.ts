@@ -11,7 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
+import { ForgotPasswordComponent } from './pages/forgotPassword/forgotPassword.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
