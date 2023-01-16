@@ -10,7 +10,7 @@
     <h1 [class.hidden]="!mobileQuery" class="title ltr:pl-4 rtl:pr-4 m-0 select-none">AAA</h1>
   </a>
 
-  <button *ngIf="isHorizontalLayout$ | async"
+<!--   <button *ngIf="isHorizontalLayout$ | async"
           [class.hidden]="mobileQuery"
           [matMenuTriggerFor]="addNewMenu"
           color="primary"
@@ -55,9 +55,9 @@
       <mat-icon svgIcon="mat:receipt"></mat-icon>
       <span>Add Receipt</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
 
-  <div #megaMenuOriginRef class="ltr:ml-2 rtl:mr-2">
+<!--   <div #megaMenuOriginRef class="ltr:ml-2 rtl:mr-2">
     <button *ngIf="isHorizontalLayout$ | async"
             [class.hidden]="mobileQuery"
             (click)="openMegaMenu(megaMenuOriginRef)"
@@ -75,12 +75,12 @@
        [class.hidden]="mobileQuery"
        class="px-gutter flex-none flex items-center">
     <vex-navigation-item *ngFor="let item of navigationItems" [item]="item"></vex-navigation-item>
-  </div>
+  </div> -->
 
   <span class="flex-1"></span>
 
   <div class="-mx-1 flex items-center">
-    <div class="px-1">
+<!--     <div class="px-1">
       <button (click)="openSearch()" mat-icon-button type="button">
         <mat-icon color="primary" svgIcon="mat:search"></mat-icon>
       </button>
@@ -88,25 +88,25 @@
 
     <div class="px-1">
       <vex-toolbar-notifications></vex-toolbar-notifications>
-    </div>
+    </div> -->
 
-    <div class="px-1">
+<!--     <div class="px-1">
       <button (click)="openQuickpanel()" mat-icon-button type="button">
         <mat-icon color="primary" svgIcon="mat:bookmarks"></mat-icon>
       </button>
-    </div>
+    </div> -->
 
-    <div class="px-1">
+ <!--    <div class="px-1">
       <button [matMenuTriggerFor]="languageMenu" mat-icon-button type="button">
         <mat-icon svgIcon="flag:united-states"></mat-icon>
       </button>
-    </div>
+    </div> -->
 
     <div *ngIf="userVisible$ | async" class="px-1">
       <vex-toolbar-user></vex-toolbar-user>
     </div>
 
-    <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
+    <!-- <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
       <button mat-menu-item>
         <mat-icon svgIcon="flag:united-states"></mat-icon>
         <span>English</span>
@@ -116,7 +116,7 @@
         <mat-icon svgIcon="flag:germany"></mat-icon>
         <span>German</span>
       </button>
-    </mat-menu>
+    </mat-menu> -->
   </div>
 </div>
 

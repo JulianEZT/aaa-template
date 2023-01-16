@@ -29,7 +29,7 @@ const defaultConfig: VexConfig = {
     imageUrl: 'assets/img/demo/logo.svg',
     showCollapsePin: true,
     user: {
-      visible: true
+      visible: false
     },
     search: {
       visible: false
