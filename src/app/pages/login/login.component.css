@@ -16,3 +16,11 @@ body#tren{
 .cursor{
     cursor: pointer;
 }
+
+::ng-deep .mat-snack-bar-container{
+    color: #ffffff !important;
+    background-color: #f44336 !important;
+  }
+  ::ng-deep .mat-simple-snackbar-action {
+    color: rgb(255, 255, 255);
+  }

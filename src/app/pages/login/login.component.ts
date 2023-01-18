@@ -5,6 +5,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { State } from 'src/app/model/state.model';
 import { Store } from '@ngrx/store';
 import { validateUser } from 'src/app/store/actions/user.action';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Duration } from 'luxon';
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -25,10 +28,11 @@ export class LoginComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   isUser;
 
-  constructor(private fg: FormBuilder, private router: Router, private store: Store<State>) { }
+  constructor(private fg: FormBuilder, private router: Router, private store: Store<State>, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.myForm = this.createMyForm();
+
     this.store.subscribe(({isUser}) => {
       this.isUser = isUser;
       if(this.isUser === true){
@@ -45,13 +49,26 @@ export class LoginComponent implements OnInit {
   }
 
   public submitFormulario() {
+
     if (this.myForm.invalid) {
       Object.values(this.myForm.controls).forEach(control => {
         control.markAsTouched();
       });
     } else {
       this.store.dispatch(validateUser({user: this.myForm.value}));
+      
+      if(!this.isUser) {
+        this.snackBar();
+      }
+
     }
+  }
+
+  public snackBar(){
+    this._snackBar.open('Usuario o contraseña incorrectos', 'Cerrar', { duration: 4000,
+      verticalPosition: 'top',
+      panelClass:['notif-success']
+  });
   }
 
   public forgotPassword() {

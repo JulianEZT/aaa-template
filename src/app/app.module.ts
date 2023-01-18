@@ -23,6 +23,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { UserEffect } from './store/effects/user/user.effect';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AnnulmentComponent } from './pages/annulment/annulment.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AnnulmentComponent } from './pages/annulment/annulment.component';
     MatRippleModule,
     MatIconModule,
     MatSidenavModule,
+    MatSnackBarModule,
     StoreModule.forRoot({
       isUser: userReducer
     }),
