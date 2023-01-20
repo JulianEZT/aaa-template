@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap } from "rxjs";
@@ -12,10 +13,12 @@ export class UserEffect {
         ofType(validateUser),
         mergeMap(({user}) => this.userService.validateUser(user)
             .pipe(
-                map((isUser: boolean) =>{
-                    return validateUserSuccess({isUser})
+                map((isUser: any) =>{
+                    return validateUserSuccess({isUser: true})
                 }),
-                catchError(err => [validateUserError(err)])
+                catchError((err: HttpErrorResponse)  => {
+                    return [validateUserError({ text: err.error, status: err.status })]
+                })
             )
         )
     ));

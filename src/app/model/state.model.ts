@@ -1,3 +1,5 @@
+import { UserState } from "../store/reducers/user/user.reducer";
+
 export interface State{
-    readonly isUser: boolean | undefined;
+    readonly userState: UserState;
 }

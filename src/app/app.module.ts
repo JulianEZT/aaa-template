@@ -24,6 +24,7 @@ import { UserEffect } from './store/effects/user/user.effect';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AnnulmentComponent } from './pages/annulment/annulment.component';
 import { TitleAdministrationComponent } from './pages/titleAdministration/titleAdministration.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 /*import tablas de angular material*/
 import {MatTableModule} from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -52,8 +53,9 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     MatRippleModule,
     MatIconModule,
     MatSidenavModule,
+    MatSnackBarModule,
     StoreModule.forRoot({
-      isUser: userReducer
+      userState: userReducer
     }),
     EffectsModule.forRoot([UserEffect]),
     VexModule,

@@ -8,6 +8,7 @@ import { validateUser } from 'src/app/store/actions/user.action';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {  UserService } from '../../services/user/user.service'
 import { Subscription } from 'rxjs';
+import { UserState } from 'src/app/store/reducers/user/user.reducer';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -27,20 +28,28 @@ export class LoginComponent implements OnInit {
   public myForm!: FormGroup;
   hide = true;
   matcher = new MyErrorStateMatcher();
-  isUser;
+  userState: UserState;
   subscription: Subscription;
 
-  constructor(private fg: FormBuilder, private router: Router, private store: Store<State>, private _snackBar: MatSnackBar, private userService: UserService) { }
+  constructor(private fg: FormBuilder, private router: Router, private store: Store<State>, private _snackBar: MatSnackBar) { 
+    
+    this.store.subscribe(({userState}) => {
+
+      this.userState = userState;
+      if(this.userState.isUser === true){
+        this.router.navigate(['../'])
+      }
+      if(this.userState.isUser === false && userState.text) {
+        this.snackBar();
+      }
+
+    });
+
+  }
 
   ngOnInit() {
     this.myForm = this.createMyForm();
 
-    this.store.subscribe(({isUser}) => {
-      this.isUser = isUser;
-      if(this.isUser === true){
-        this.router.navigate(['../'])
-      }
-    });
   }
 
   private createMyForm(): FormGroup {
@@ -58,24 +67,20 @@ export class LoginComponent implements OnInit {
       });
     } else {
       this.store.dispatch(validateUser({user: this.myForm.value}));
-
-      if(!this.isUser) {
-        this.snackBar();
-      }
-
     }
   }
 
   public snackBar(){
 
-    this.subscription = this.userService.getMessage().subscribe(message => {
-      console.log(message);
-      this._snackBar.open( message.text, 'Cerrar', { duration: 4000,
+    if(this.userState.isUser === false){
+
+      this._snackBar.open( this.userState.text, 'Cerrar', { duration: 4000,
         verticalPosition: 'top',
         panelClass:['notif-success']
       });
-      
-    });
+
+    }
+
 
   }
 

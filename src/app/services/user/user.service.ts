@@ -9,30 +9,17 @@ export let subject = new Subject<any>();
 @Injectable({
     providedIn: 'root'
 })
-export class UserService{
-    constructor(private http: HttpClient){}
+export class UserService {
+    constructor(private http: HttpClient) { }
 
-    validateUser(user: User): Observable<boolean>{
-        return new Observable(suscribe => {
+    validateUser(user: User): Observable<any> {
 
-            let respuesta = this.http.get('/api/users/login?username='+user.username+'&password='+user.password).subscribe( response => {
-            let data = JSON.stringify(response)
-            let respuesta = JSON.parse(data)
-            console.log(respuesta)
-            if(user.username === respuesta.username && user.password === respuesta.password){
-                suscribe.next(true);
-            }else{
-                suscribe.next(false);
-            }
-           }, err => {
-            subject.next({text: err.error, status: err.status});
-            })
-        })
+        return this.http.get('http://localhost:3000/login?username=' + user.username + '&password=' + user.password)
     }
 
     public getMessage(): Observable<any> {
         return subject.asObservable();
-      }
+    }
 
 
 }
