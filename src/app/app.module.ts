@@ -23,14 +23,20 @@ import { EffectsModule } from '@ngrx/effects'
 import { UserEffect } from './store/effects/user/user.effect';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AnnulmentComponent } from './pages/annulment/annulment.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { TitleAdministrationComponent } from './pages/titleAdministration/titleAdministration.component';
+/*import tablas de angular material*/
+import {MatTableModule} from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { MatTableExporterModule } from 'mat-table-exporter';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    AnnulmentComponent
+    AnnulmentComponent,
+    TitleAdministrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,13 +52,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatRippleModule,
     MatIconModule,
     MatSidenavModule,
-    MatSnackBarModule,
     StoreModule.forRoot({
       isUser: userReducer
     }),
     EffectsModule.forRoot([UserEffect]),
     VexModule,
-    CustomLayoutModule
+    CustomLayoutModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableExporterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
