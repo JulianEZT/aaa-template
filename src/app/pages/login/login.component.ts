@@ -6,7 +6,8 @@ import { State } from 'src/app/model/state.model';
 import { Store } from '@ngrx/store';
 import { validateUser } from 'src/app/store/actions/user.action';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { Duration } from 'luxon';
+import {  UserService } from '../../services/user/user.service'
+import { Subscription } from 'rxjs';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -27,8 +28,9 @@ export class LoginComponent implements OnInit {
   hide = true;
   matcher = new MyErrorStateMatcher();
   isUser;
+  subscription: Subscription;
 
-  constructor(private fg: FormBuilder, private router: Router, private store: Store<State>, private _snackBar: MatSnackBar) { }
+  constructor(private fg: FormBuilder, private router: Router, private store: Store<State>, private _snackBar: MatSnackBar, private userService: UserService) { }
 
   ngOnInit() {
     this.myForm = this.createMyForm();
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public submitFormulario() {
+  public async submitFormulario() {
 
     if (this.myForm.invalid) {
       Object.values(this.myForm.controls).forEach(control => {
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit {
       });
     } else {
       this.store.dispatch(validateUser({user: this.myForm.value}));
-      
+
       if(!this.isUser) {
         this.snackBar();
       }
@@ -65,10 +67,16 @@ export class LoginComponent implements OnInit {
   }
 
   public snackBar(){
-    this._snackBar.open('Usuario o contraseña incorrectos', 'Cerrar', { duration: 4000,
-      verticalPosition: 'top',
-      panelClass:['notif-success']
-  });
+
+    this.subscription = this.userService.getMessage().subscribe(message => {
+      console.log(message);
+      this._snackBar.open( message.text, 'Cerrar', { duration: 4000,
+        verticalPosition: 'top',
+        panelClass:['notif-success']
+      });
+      
+    });
+
   }
 
   public forgotPassword() {

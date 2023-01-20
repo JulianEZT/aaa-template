@@ -124,15 +124,27 @@ export class AppComponent {
         label: 'Dashboards',
         children: [
           {
-            type: 'link',
-            label: 'Analytics',
-            route: 'a',
-            icon: 'mat:insights',
-            routerLinkActiveOptions: { exact: true }
+            type: 'dropdown',
+            label: 'Configuración',
+            icon: 'mat:insights',    
+            children: [
+              {
+                type: 'link',
+                label: 'Accionistas',
+                route: 'TitleAdministration',
+                routerLinkActiveOptions: { exact: true }
+              },
+              {
+                type: 'link',
+                label: 'Pagos',
+                route: 'annulment',
+                routerLinkActiveOptions: { exact: true }
+              }
+            ]
           },
           {
             type: 'dropdown',
-            label: 'Accionistas - Titulos',
+            label: 'Titulos',
             icon: 'mat:insights',    
             children: [
               {
@@ -157,6 +169,25 @@ export class AppComponent {
                 type: 'link',
                 label: 'Traslados',
                 route: 'a',
+                routerLinkActiveOptions: { exact: true }
+              }
+            ]
+          },
+          {
+            type: 'dropdown',
+            label: 'Asambleas',
+            icon: 'mat:insights',    
+            children: [
+              {
+                type: 'link',
+                label: 'Asambleas',
+                route: 'TitleAdministration',
+                routerLinkActiveOptions: { exact: true }
+              },
+              {
+                type: 'link',
+                label: 'Reporte de asambleas',
+                route: 'annulment',
                 routerLinkActiveOptions: { exact: true }
               }
             ]
