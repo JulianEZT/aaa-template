@@ -5,7 +5,8 @@ import { logout, validateUser, validateUserError, validateUserSuccess } from '..
 export interface UserState {
     isUser: boolean;
     text?: string;
-    state?: number
+    state?: number;
+    token?: string;
 }
 
 export const initialState: UserState = { 
@@ -14,10 +15,11 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
     initialState,
-    on(validateUserSuccess, (state, { isUser }) => {
+    on(validateUserSuccess, (state, { isUser, token }) => {
+        console.log("isUser reducer", token);
         if (isUser)
             localStorage.setItem('isUser', 'true');
-        return { isUser }
+        return { isUser, token }
     }),
     on(logout, (state) => {
         localStorage.removeItem('isUser');

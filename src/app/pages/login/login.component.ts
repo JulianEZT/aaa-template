@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   constructor(private fg: FormBuilder, private router: Router, private store: Store<State>, private _snackBar: MatSnackBar) { 
     
     this.store.subscribe(({userState}) => {
-
+      console.log("userState", userState)
       this.userState = userState;
       if(this.userState.isUser === true){
         this.router.navigate(['../'])

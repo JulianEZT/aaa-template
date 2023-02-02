@@ -14,7 +14,8 @@ export class UserEffect {
         mergeMap(({user}) => this.userService.validateUser(user)
             .pipe(
                 map((isUser: any) =>{
-                    return validateUserSuccess({isUser: true})
+                    console.log("isUser", isUser);
+                    return validateUserSuccess({isUser: true, token: isUser})
                 }),
                 catchError((err: HttpErrorResponse)  => {
                     return [validateUserError({ text: err.error, status: err.status })]
