@@ -24,12 +24,10 @@ import { UserEffect } from './store/effects/user/user.effect';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AnnulmentComponent } from './pages/annulment/annulment.component';
 import { TitleAdministrationComponent } from './pages/titleAdministration/titleAdministration.component';
-/*import tablas de angular material*/
-import {MatTableModule} from '@angular/material/table';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import { MatTableExporterModule } from 'mat-table-exporter';
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,11 +56,9 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     EffectsModule.forRoot([UserEffect]),
     VexModule,
     CustomLayoutModule,
-    MatTableModule,
-    MatSlideToggleModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableExporterModule,
+    ButtonModule,
+    TableModule,
+    InputTextModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

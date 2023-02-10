@@ -1,98 +1,103 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { AppService } from './titleAdministration.service';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
   selector: 'app-titleAdministration',
   styleUrls: ['./titleAdministration.component.css'],
   templateUrl: './titleAdministration.component.html',
 })
-export class TitleAdministrationComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+export class TitleAdministrationComponent implements OnInit{
+  usuarios = [];
+  cols: any[] = [];
+  usuarioSeleccionado;
+  exportColumns: any[];
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  constructor(private appService: AppService) { 
+   }
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  ngOnInit(): void {
+    this.cols = [
+      { field: "id", header: "ID" },
+      { field: "accionista", header: "Accionista" },
+      { field: "estado", header: "Estado" },
+      { field: "observacion", header: "Observación" },
+      { field: "fecha", header: "Fecha" },
+    ];
+    this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
+    this.getListaUsuarios();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  getListaUsuarios(){
+    this.appService.getListaUsuarios().subscribe(
+      response => this.usuarios = response
+    )
+  }
+  onRowSelect(event: any) {
+    alert(`Id: ${this.usuarioSeleccionado.id}, Accionista: ${this.usuarioSeleccionado.accionista}, Estado: ${this.usuarioSeleccionado.estado} Observación: ${this.usuarioSeleccionado.observacion}, Fecha: ${this.usuarioSeleccionado.fecha}`) 
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+        const worksheet = xlsx.utils.json_to_sheet(this.usuarios);
+        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, "usuarios");
+    });
 }
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
+saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+exportPdf() {
+  const doc = new jsPDF('l', 'mm', 'a4');
+
+  const head = [['ID', 'Accionista', 'Estado', 'Observación', 'fecha']];
+
+  autoTable(doc, {
+      head: head,
+      body: this.toPdfFormat(),
+      didDrawCell: (data) => { },
+  });
+  doc.save('usuarios.pdf');
+}
+toPdfFormat() {
+  let data = [];
+  for (var i = 0; i < this.usuarios.length; i++) {
+      data.push([
+          this.usuarios[i].id,
+          this.usuarios[i].accionista,
+          this.usuarios[i].estado,
+          this.usuarios[i].observacion,
+          this.usuarios[i].fecha,
+      ]);
+  }
+  return data;
+}
+
+exportarCsv(){
+  var opciones = { 
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: true, 
+    showTitle: true,
+    title: 'Lista de usuarios',
+    useBom: true,
+    headers: ["ID", "Accionista", "Estado", "Observación", "Fecha"],
   };
+
+  new ngxCsv(this.usuarios, "usuarios", opciones);
+}
 }
